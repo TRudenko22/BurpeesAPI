@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  db:
+    image: mongo
+
+  api:
+    environment:
+      MONGO_HOSTNAME: db
+    build: 
+      context: ./api
+      dockerfile: Dockerfile
+
+    depends_on:
+      - db
+    ports:
+      - "8000:80"

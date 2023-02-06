@@ -2,12 +2,14 @@ from dataclasses import dataclass
 from datetime import datetime
 from fastapi import FastAPI, HTTPException
 from uuid import uuid4
+from os import environ
 import pymongo
+
 
 app = FastAPI()
 
 # database connection
-connection = pymongo.MongoClient('localhost', 27017)
+connection = pymongo.MongoClient(environ.get("MONGO_HOSTNAME"), 27017)
 collection = connection['workout']
 db = collection['workout']
 
@@ -21,7 +23,7 @@ class Workout:
 # CRUD
 @app.get("/")
 def route():
-    return {"status": "what's poppin"}
+    return {"status": "this is the burpeeAPI"}
 
 # Create
 @app.post("/workout/")
