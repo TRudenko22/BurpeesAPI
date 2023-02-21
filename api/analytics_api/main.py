@@ -41,8 +41,6 @@ class AnalyticsEngine:
 
         return {"burpees": total_reps, "mins": total_mins} 
 
-
-
 @app.get("/")
 def home():
     return {"detail": "This is the analytics api"}
