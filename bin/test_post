@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+
+import random
+import json
+import requests
+
+for i in range(0, 101):
+    request_structure = {
+            "burpees": random.randint(0, 100),
+            "mins": random.randint(0, 60),
+            "code": random.choice(["NS", "2M1P", "BB", "6M"]),
+        }
+
+    json_request = json.dumps(request_structure)
+    
+    requests.post("http://localhost:8000/workout/", json_request)
+    print(json_request)
