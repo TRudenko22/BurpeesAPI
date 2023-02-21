@@ -41,19 +41,29 @@ class AnalyticsEngine:
 
         return {"burpees": total_reps, "mins": total_mins} 
 
+def pull_json_data(url_str: str) -> AnalyticsEngine:
+    analytics = AnalyticsEngine()
+    all_workouts = requests.get(url_str).content
+
+    analytics.add_bulk(json.loads(all_workouts))
+
+    return analytics 
+
 @app.get("/")
 def home():
     return {"detail": "This is the analytics api"}
 
 @app.get("/totals/")
 def get_totals():
-    analytics = AnalyticsEngine()
-    all_workouts = requests.get(URL + "/workout/").content
+    workout_data = pull_json_data(URL + "/workout/")
 
-    analytics.add_bulk(json.loads(all_workouts))
-
-    return analytics.totals() 
+    return workout_data.totals()
     
+@app.get("/code/{code}")
+def get_total_by_code(code: str):
+    workout_data = pull_json_data(URL + f"/code/{code}")
+
+    return workout_data.totals()
 
 
 
