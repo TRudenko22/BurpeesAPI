@@ -6,11 +6,11 @@ services:
     volumes:
       - "./data:/data/db"
 
-  api:
+  db_api:
     environment:
       MONGO_HOSTNAME: db
     build: 
-      context: ./api
+      context: ./api/database_api/
       dockerfile: Dockerfile
 
     depends_on:

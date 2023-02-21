@@ -13,6 +13,7 @@ connection = pymongo.MongoClient(environ.get("MONGO_HOSTNAME"), 27017)
 collection = connection['workout']
 db = collection['workout']
 
+
 @dataclass
 class Workout:
     burpees: int
@@ -47,7 +48,7 @@ async def all_workouts():
 async def workout_by_code(code: str):
     lst: list = []
     
-    if code not in ["NS", "2M1P", "2M", "BB"]:
+    if code not in ["NS", "2M1P", "2M", "BB", "6M"]:
         return HTTPException(404, "workout code not found")
 
     for i in db.find({}):
