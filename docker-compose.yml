@@ -18,3 +18,17 @@ services:
     ports:
       - "8000:80"
 
+  analytics:
+    environment:
+      DB_API_SERVER: db_api
+      DB_API_PORT: 80
+
+    build:
+      context: ./api/analytics_api/
+      dockerfile: Dockerfile
+
+    ports:
+      - "8001:80"
+
+
+
